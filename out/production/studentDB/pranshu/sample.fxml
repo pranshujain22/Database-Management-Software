@@ -1,0 +1,84 @@
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.geometry.Insets?>
+<BorderPane fx:id="mainBorderPane" fx:controller="pranshu.Controller"
+            xmlns:fx="http://javafx.com/fxml">
+    <top>
+        <MenuBar>
+            <Menu text="File">
+                <items>
+                    <MenuItem fx:id="newDB" text="New DB" onAction="#createDB"/>
+                    <SeparatorMenuItem/>
+                    <MenuItem fx:id="openDB" text="Open DB" onAction="#openDB"/>
+                </items>
+            </Menu>
+            <Menu text="Edit">
+                <items>
+                    <MenuItem fx:id="addNewRecord" text="Add" onAction="#addNewDialog"/>
+                    <SeparatorMenuItem/>
+                    <MenuItem fx:id="addBatchRecord" text="Add (Batch)" onAction="#addNewDialog"/>
+                    <SeparatorMenuItem/>
+                    <MenuItem fx:id="updateRecord" text="Update" onAction="#addNewDialog"/>
+                    <SeparatorMenuItem/>
+                    <MenuItem fx:id="updateBatchRecord" text="Update (Batch)" onAction="#addNewDialog"/>
+                    <SeparatorMenuItem/>
+                    <MenuItem fx:id="deleteRecord" text="Delete" onAction="#addNewDialog"/>
+                </items>
+            </Menu>
+            <Menu text="Exit">
+                <items>
+                    <MenuItem fx:id="exit" text="Exit" onAction="#addNewDialog"/>
+                </items>
+            </Menu>
+        </MenuBar>
+    </top>
+
+    <center>
+        <Label fx:id="welcomeLabel" text="Welcome To Student Database!"
+               style="-fx-font-family: Rockwell;-fx-font-size: 50"
+               BorderPane.alignment="CENTER"/>
+    </center>
+    <fx:define>
+        <ToggleGroup fx:id="searchToggleGroup"/>
+    </fx:define>
+    <bottom>
+        <GridPane BorderPane.alignment="CENTER" prefHeight="500">
+            <HBox fx:id="hbox" GridPane.rowIndex="0" GridPane.hgrow="ALWAYS" prefHeight="50" maxWidth="900"
+                  GridPane.halignment="CENTER" spacing="10">
+                <VBox GridPane.columnIndex="0" prefWidth="150">
+                    <RadioButton fx:id="by_id" text="search by enroll-id" toggleGroup="$searchToggleGroup"
+                                 selected="true"/>
+                    <RadioButton fx:id="by_name" text="search by name" toggleGroup="$searchToggleGroup"/>
+                </VBox>
+                <TextField fx:id="search_keyword" promptText="enrollment_id or name" onKeyReleased="#onTextField"/>
+                <Button fx:id="search_button" text="Search" onAction="#searchRecord"/>
+                <Button text="Show All Records" onAction="#showTable"/>
+                <Label fx:id="search_Label"/>
+            </HBox>
+
+            <TableView fx:id="tableView" GridPane.rowIndex="1" prefWidth="500" GridPane.hgrow="ALWAYS"
+                       maxWidth="900" GridPane.halignment="CENTER">
+            </TableView>
+
+            <!--<Label fx:id="status_label" GridPane.rowIndex="2" prefHeight="150" prefWidth=" 900" GridPane.halignment="CENTER"/>-->
+            <TableView fx:id="status_table" GridPane.rowIndex="2" prefWidth="500" GridPane.hgrow="ALWAYS"
+                       maxWidth="900" GridPane.halignment="CENTER"/>
+            <padding>
+                <Insets bottom="5" left="10"/>
+            </padding>
+            <Label text="&#169; Pranshu Jain" style="-fx-font-size: 15" textFill="red" GridPane.rowIndex="3"/>
+        </GridPane>
+    </bottom>
+</BorderPane>
